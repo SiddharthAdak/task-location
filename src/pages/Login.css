@@ -16,20 +16,17 @@
     
 
 }
-.PhoneInput{
-    margin: 10px 0px;
-}
+
 .login-form input{
     padding: 5px 8px;
     font-size: 15px;
+    width: 100%;
 }
 .error{
     font-size: small;
     color: red;
 }
-.otp-input{
-    width: 100%;
-}
+
 .login-form button{
     padding: 5px 7px;
     border: 0px;

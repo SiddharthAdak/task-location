@@ -1,14 +1,9 @@
 import React from 'react';
 import "./Login.css"
 import { useState } from 'react';
-import 'react-phone-number-input/style.css';
-import PhoneInput from 'react-phone-number-input';
 import { auth } from '../firebase';
-
 import { RecaptchaVerifier, signInWithPhoneNumber } from "firebase/auth";
 function Login() {
-    
-    
     
     const [number, setNumber] = useState("");
     const [error, setError] = useState("");
@@ -23,7 +18,7 @@ function Login() {
           auth
         );
         recaptchaVerifier.render();
-        return signInWithPhoneNumber(auth, number, recaptchaVerifier)
+        return signInWithPhoneNumber(auth, `+91${number}`, recaptchaVerifier)
     }
     const getOtp = async (e) => {
         e.preventDefault();
@@ -67,10 +62,17 @@ function Login() {
         <div className = "form-container">
         <h1>Login</h1>
             {!flag ? <form className = "login-form" onSubmit={getOtp}>
-                <PhoneInput
-                    defaultCountry = "IN"
+                <input
+                    type = "text"
                     value={number}
-                    onChange = {setNumber}
+                    onChange = {(e) => {
+                      const re = /^[0-9\b]+$/;
+                      if ((e.target.value === '' || re.test(e.target.value)) && e.target.value.length <= 10) {
+                        
+                        console.log(e.target.value);
+                        setNumber(e.target.value);
+                      }
+                    }}
                     placeholder = "Enter mobile number"
                 />
 
