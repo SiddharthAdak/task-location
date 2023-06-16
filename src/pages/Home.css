@@ -1,0 +1,46 @@
+.home{
+    margin-top: 70px;
+    padding: 20px;
+    width: 100vw;
+}
+.container{
+    max-width: 1000px;
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+.container-input{
+    width: 48%;
+}
+.container-input input{
+    padding: 5px;
+    width: 100%;
+    font-size: 15px;
+}
+.options{
+    margin-top: 3px;
+    
+    box-shadow: 0px 0px 10px 0px rgb(163, 163, 163);
+}
+.container-input p{
+    font-size: 15px;
+    padding: 10px 20px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+.container-input p:hover{
+    background-color: rgb(233, 233, 233);
+}
+
+@media screen and (max-width: 800px) {
+    .container{
+        display: block;
+    }
+    .container-input{
+        margin-top: 10px;
+        width: 100%;
+    }
+  }

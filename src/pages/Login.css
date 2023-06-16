@@ -1,0 +1,46 @@
+.form-container{
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    padding: 10px;
+    align-items: center;
+    justify-content: center;
+    background-color: rgb(245, 245, 245);
+    flex-direction: column;
+}
+.login-form{
+    background-color: white;
+    margin-top: 10px;
+    width: 400px;
+    padding: 20px;
+    
+
+}
+.PhoneInput{
+    margin: 10px 0px;
+}
+.login-form input{
+    padding: 5px 8px;
+    font-size: 15px;
+}
+.error{
+    font-size: small;
+    color: red;
+}
+.otp-input{
+    width: 100%;
+}
+.login-form button{
+    padding: 5px 7px;
+    border: 0px;
+    border-radius: 10px;
+    color: rgb(255, 255, 255);
+    background-color: black;
+    font-size: 15px;
+    margin-top: 5px;
+}
+@media screen and (max-width: 450px) {
+    .login-form{
+        width: 100%;
+    }
+  }
