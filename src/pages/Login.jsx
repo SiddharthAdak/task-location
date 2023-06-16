@@ -62,7 +62,10 @@ function Login() {
         <div className = "form-container">
         <h1>Login</h1>
             {!flag ? <form className = "login-form" onSubmit={getOtp}>
+            <div className = "phone">
+                <span>+91</span>
                 <input
+                    className = "phone-input"
                     type = "text"
                     value={number}
                     onChange = {(e) => {
@@ -75,7 +78,7 @@ function Login() {
                     }}
                     placeholder = "Enter mobile number"
                 />
-
+            </div>
                 <div id="recaptcha-container"></div>
                 {error && <p className = "error"> {error} </p>}
                 <button type = "submit" >Submit</button>

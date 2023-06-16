@@ -16,6 +16,13 @@
     
 
 }
+.phone{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    margin-bottom: 5px;
+}
 
 .login-form input{
     padding: 5px 8px;
