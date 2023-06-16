@@ -8,21 +8,22 @@ function Home() {
     const [destination, setDestination] = useState("");
     const [destOptions, setDestOptions] = useState([]);
     
-    const NOMINATIM_BASE_URL = "https://nominatim.openstreetmap.org/search?";
+    const NOMINATIM_BASE_URL = "https://api.geoapify.com/v1/geocode/autocomplete?";
     useEffect(() => {
         
         let timer = setTimeout(async() => {
             
             if (origin.trim() !== "") {
                 const params = {
-                    q: origin,
-                    format: "json"
+                    text: origin,
+                    filter: "countrycode:in",
+                    apiKey: import.meta.env.VITE_GEOAPIFY_API_KEY
                 };
                 const queryString = new URLSearchParams(params).toString();
                 try{
                     let response = await axios.get(`${NOMINATIM_BASE_URL}${queryString}`);
                     console.log(response);
-                    setOriginOptions(response.data)
+                    setOriginOptions(response.data.features)
                 }
                 catch(err){
                     console.log(err)
@@ -46,14 +47,15 @@ function Home() {
             
             if (destination.trim() !== "") {
                 const params = {
-                    q: destination,
-                    format: "json"
+                    text: origin,
+                    filter: "countrycode:in",
+                    apiKey: import.meta.env.VITE_GEOAPIFY_API_KEY
                 };
                 const queryString = new URLSearchParams(params).toString();
                 try{
                     let response = await axios.get(`${NOMINATIM_BASE_URL}${queryString}`);
                     console.log(response);
-                    setDestOptions(response.data)
+                    setDestOptions(response.data.features)
                 }
                 catch(err){
                     console.log(err)
@@ -84,10 +86,10 @@ function Home() {
                     {originOptions.length!==0 && 
                         <div className = "options">
                             {originOptions?.map((option)=>{
-                                return <p key = {option.place_id} onClick = {(e) => {
+                                return <p key = {option.properties.place_id} onClick = {(e) => {
                                     
-                                    setOrigin(option.display_name)
-                                }}>{option.display_name}</p>
+                                    setOrigin(option.properties.formatted)
+                                }}>{option.properties.formatted}</p>
                             })}
                         </div>
                     }
@@ -99,10 +101,10 @@ function Home() {
                     {destOptions.length!==0 && 
                         <div className = "options">
                             {destOptions?.map((option)=>{
-                                return <p key = {option.place_id} onClick = {(e) => {
+                                return <p key = {option.properties.place_id} onClick = {(e) => {
                                     
-                                    setDestination(option.display_name)
-                                }}>{option.display_name}</p>
+                                    setDestination(option.properties.formatted)
+                                }}>{option.properties.formatted}</p>
                             })}
                         </div>
                     }
