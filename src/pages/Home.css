@@ -34,7 +34,11 @@
 .container-input p:hover{
     background-color: rgb(233, 233, 233);
 }
-
+#my-map {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+  }
 @media screen and (max-width: 800px) {
     .container{
         display: block;

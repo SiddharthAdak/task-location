@@ -1,14 +1,15 @@
 import axios from "axios"
 import React, {useEffect, useState} from 'react'
 import './Home.css'
-
+import MyMap from "../components/MyMap";
 function Home() {
     const [origin, setOrigin] = useState("");
     const [originOptions, setOriginOptions] = useState([]);
     const [destination, setDestination] = useState("");
     const [destOptions, setDestOptions] = useState([]);
-    
-    const NOMINATIM_BASE_URL = "https://api.geoapify.com/v1/geocode/autocomplete?";
+    const [selectedOrigin, setSelectedOrigin] = useState(null);
+    const [selectedDest, setSelectedDest] = useState(null);
+    const GEOAPIFY_BASE_URL = "https://api.geoapify.com/v1/geocode/autocomplete?";
     useEffect(() => {
         
         let timer = setTimeout(async() => {
@@ -21,7 +22,7 @@ function Home() {
                 };
                 const queryString = new URLSearchParams(params).toString();
                 try{
-                    let response = await axios.get(`${NOMINATIM_BASE_URL}${queryString}`);
+                    let response = await axios.get(`${GEOAPIFY_BASE_URL}${queryString}`);
                     console.log(response);
                     setOriginOptions(response.data.features)
                 }
@@ -47,13 +48,13 @@ function Home() {
             
             if (destination.trim() !== "") {
                 const params = {
-                    text: origin,
+                    text: destination,
                     filter: "countrycode:in",
                     apiKey: import.meta.env.VITE_GEOAPIFY_API_KEY
                 };
                 const queryString = new URLSearchParams(params).toString();
                 try{
-                    let response = await axios.get(`${NOMINATIM_BASE_URL}${queryString}`);
+                    let response = await axios.get(`${GEOAPIFY_BASE_URL}${queryString}`);
                     console.log(response);
                     setDestOptions(response.data.features)
                 }
@@ -89,6 +90,7 @@ function Home() {
                                 return <p key = {option.properties.place_id} onClick = {(e) => {
                                     
                                     setOrigin(option.properties.formatted)
+                                    setSelectedOrigin(option.properties)
                                 }}>{option.properties.formatted}</p>
                             })}
                         </div>
@@ -102,7 +104,7 @@ function Home() {
                         <div className = "options">
                             {destOptions?.map((option)=>{
                                 return <p key = {option.properties.place_id} onClick = {(e) => {
-                                    
+                                    setSelectedDest(option.properties)
                                     setDestination(option.properties.formatted)
                                 }}>{option.properties.formatted}</p>
                             })}
@@ -110,7 +112,9 @@ function Home() {
                     }
                 </div>
                 
+                
             </div>
+            <MyMap selectedOrigin = {selectedOrigin} selectedDest = {selectedDest}  />
         </div>
     )
 }
