@@ -1,7 +1,7 @@
 import axios from "axios"
 import React, {useEffect, useState} from 'react'
 import './Home.css'
-import MyMap from "../components/MyMap";
+import MyMap from "../components/myMap";
 function Home() {
     const [origin, setOrigin] = useState("");
     const [originOptions, setOriginOptions] = useState([]);
